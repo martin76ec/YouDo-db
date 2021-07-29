@@ -1,0 +1,19 @@
+{
+  "name": "youdo-db",
+  "version": "0.0.1",
+  "description": "You-Do database",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "ava tests/ --verbose",
+    "lint": "standard"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ava": "^3.15.0",
+    "standard": "^16.0.3"
+  },
+  "dependencies": {
+    "sequelize": "^6.6.5"
+  }
+}
