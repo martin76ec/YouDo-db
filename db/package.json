@@ -4,7 +4,7 @@
   "description": "You-Do database",
   "main": "src/index.js",
   "scripts": {
-    "test": "ava tests/ --verbose",
+    "test": "ava src/tests/* --verbose",
     "lint": "standard"
   },
   "author": "",
