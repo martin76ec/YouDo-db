@@ -19,6 +19,27 @@ const users = [
   extend(user, { user_name: "Rideon", user_id: "0000_0000_0000_03", user_nickname: "Time", user_tag: 3})
 ]
 
+function createUser(newUser) {
+  newUser = extend(user, newUser)
+  users.push(newUser)
+
+  return newUser
+}
+
+function findById(user_id) {
+  return users.find( user => user.user_id === user_id )
+} 
+
+function updateUser(data, user) {
+  const userIndex = users.find((element, index) => {
+    if(element.user_id === user.user_id) {
+      return index
+    }
+  })
+
+  return Object.assign(users[index], data)
+}
+
 module.exports = {
   user,
   users,
