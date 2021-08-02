@@ -8,7 +8,7 @@ module.exports = function setupUserModel(config) {
   
   return database.define("users", {
     user_id: {
-      type: Sequelize.TEXT,
+      type: Sequelize.STRING(14),
       primaryKey: true,
       allowNull: false
     },

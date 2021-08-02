@@ -8,7 +8,7 @@ module.exports = function setupAccountModel(config) {
 
   return database.define("accounts", {
     account_id: {
-      type: Sequelize.TEXT,
+      type: Sequelize.STRING(14),
       primaryKey: true,
       allowNull: false
     },

@@ -14,7 +14,7 @@ module.exports = function setupTaskModel(config) {
       autoIncrement: true
     },
     task_title: {
-      type: Sequelize.TEXT(600),
+      type: Sequelize.TEXT,
       allowNull: false
     },
     task_description: {
