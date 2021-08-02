@@ -21,7 +21,6 @@ const modelStubSetter = () => {
     belongsToMany: function() {}
   }
   TaskStub = {
-    hasOne: sinon.spy(),
     belongsToMany: sinon.spy()
   }
   SharedTaskStub = {
@@ -48,8 +47,6 @@ ava.afterEach(() => {
 
 ava.serial("task relationships", test => {
   const database = setupDatabase({ dialect: "mariadb" })
-  test.true(TaskStub.hasOne.called, "TaskStub should call hasOne")
-  test.true(TaskStub.hasOne.calledWith(UserStub), "TaskStub should call hasOne with User as argument")
   test.true(TaskStub.belongsToMany.called, "TaskStub should call belongsToMany")
   test.true(TaskStub.belongsToMany.calledWith(UserStub), "TaskStub should call belongsToMany with SharedTaskStub as argument")
 })

@@ -6,17 +6,18 @@ const setupAccountModel = require("./models/account")
 const setupSharedTaskModel = require("./models/sharedTask")
 const setupTaskModel = require("./models/task")
 const setupUserModel = require("./models/user")
+const setupUser = require("./lib/user") 
 
 module.exports = async function(config) {
   const database = setupDatabase(config)
-  const Account = setupAccountModel(config)
-  const SharedTask = setupSharedTaskModel(config)
-  const Task = setupTaskModel(config)
-  const User = setupUserModel(config) 
+  const AccountModel = setupAccountModel(config)
+  const SharedTaskModel = setupSharedTaskModel(config)
+  const TaskModel = setupTaskModel(config)
+  const UserModel = setupUserModel(config) 
 
-  User.hasOne(Account)
-  Account.belongsTo(User)
-  Task.belongsToMany(User, { through: SharedTask })
+  UserModel.hasOne(AccountModel)
+  AccountModel.belongsTo(UserModel)
+  TaskModel.belongsToMany(UserModel, { through: SharedTaskModel })
 
   try {
     await database.authenticate()
@@ -28,8 +29,10 @@ module.exports = async function(config) {
     await database.sync({ force: true })
   }
 
+  const User = setupUser(UserModel)
+
   return {
-    Account,
+    Account: {},
     User,
     SharedTask: {},
     Task: {}
