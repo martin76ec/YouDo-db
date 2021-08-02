@@ -1,5 +1,6 @@
 "use strict"
 
+const debug = require("debug")("youdo-db:setup")
 const setupDatabase = require("./lib/database")
 const setupAccountModel = require("./models/account")
 const setupSharedTaskModel = require("./models/sharedTask")
@@ -12,12 +13,10 @@ module.exports = async function(config) {
   const SharedTask = setupSharedTaskModel(config)
   const Task = setupTaskModel(config)
   const User = setupUserModel(config) 
+
   User.hasOne(Account)
   Account.belongsTo(User)
-  Task.hasOne(User)
-  User.belongsTo(Task)
   Task.belongsToMany(User, { through: SharedTask })
-  User.belongsToMany(Task, { through: SharedTask })
 
   try {
     await database.authenticate()
@@ -26,7 +25,7 @@ module.exports = async function(config) {
   }
 
   if(config.setup) {
-    database.sync({ force: true })
+    await database.sync({ force: true })
   }
 
   return {
