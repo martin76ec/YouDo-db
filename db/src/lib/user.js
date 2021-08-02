@@ -1,29 +1,39 @@
 "user strict"
 
-module.exports = async function setupUser(UserModel) {
-  function createUser(user) {
-    const user = await UserModel.create(user)
+module.exports = function setupUser(UserModel) {
+  async function createUser(user) {
+    const newUser = await UserModel.create(user)
     .catch(error => {
       throw(new Error("Cannot write user in database"))
     })
 
-    return user
+    return newUser
   }
 
-  function findById(user_id) {
-    return UserModel.findAll({
+  async function findAll() {
+    return await UserModel.findAll({
       attributes: ["user_id", "user_name", "user_nickname"],
-      where: {
-        user_id: user_id
-      }
-    }).shift()
+    })
   }
 
-  function updateUser(data, user) {
-    const user = await.UserModel.update(data, {
+  async function findById(id) {
+    return await UserModel.findByPk(id)
+  }
+
+  async function updateUser(data, user) {
+    const updatedUser = await UserModel.update(data, {
       where: {
         user_id: user.user_id
       }
     })
+
+    return updatedUser
+  }
+
+  return {
+    createUser,
+    findById,
+    findAll,
+    updateUser
   }
 }

@@ -8,7 +8,7 @@ const user = {
 }
 
 function extend(object, attributes) {
-  const clone = Ubject.assing({}, object)
+  const clone = Object.assign({}, object)
   return Object.assign(clone, attributes)
 }
 
@@ -30,6 +30,10 @@ function findById(user_id) {
   return users.find( user => user.user_id === user_id )
 } 
 
+function findAll() {
+  return { ...users }
+}
+
 function updateUser(data, user) {
   const userIndex = users.find((element, index) => {
     if(element.user_id === user.user_id) {
@@ -44,5 +48,6 @@ module.exports = {
   user,
   users,
   hasNickName: users.filter( user => user.user_nickname && user.user_nickname !== ""),
-  byId: id => users.filter( user => user.user_id == id)
+  findById: id => users.filter( user => user.user_id == id),
+  findAll
 }
