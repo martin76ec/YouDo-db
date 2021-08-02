@@ -5,7 +5,7 @@
 ``` js
 const setupDatabase = require('youdo-db')
 
-setupDatabase(config).then(db => {
-  const  {Agent, Metric} = db
+setupDatabase(config).then(database => {
+  const  {Account, User, SharedTask, Task} = database
 }).catch(err => console.error(error))
 ```
