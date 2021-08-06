@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "setup": "DEBUG=youdo-db:* node src/setup.js",
-    "test": "nyc --reporter html ava src/tests/* --verbose",
+    "test": "nyc --reporter html ava src/tests/* src/tests/lib/* src/tests/models/* --verbose",
     "lint": "standard"
   },
   "author": "",
