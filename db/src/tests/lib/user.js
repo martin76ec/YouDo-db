@@ -3,7 +3,7 @@
 const ava = require("ava")
 const sinon = require("sinon")
 const proxyquire = require("proxyquire")
-const userFixtures = require("./fixtures/user")
+const userFixtures = require("../fixtures/user")
 
 let id = "0000_000_000_00"
 let sandbox = null
@@ -44,7 +44,7 @@ ava.beforeEach(async() => {
   UserStub.findAll = sandbox.stub()
   UserStub.findAll.returns(Promise.resolve(userFixtures.findAll()))
 
-  setupDatabase = proxyquire("../", {
+  setupDatabase = proxyquire("../../", {
     "./lib/database": DatabaseStub,
     "./models/user": () => UserStub,
     "./models/account": () => AccountStub,

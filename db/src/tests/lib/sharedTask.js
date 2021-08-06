@@ -6,32 +6,32 @@ const proxyquire = require("proxyquire")
 
 let sandbox = null
 let setupDatabase = null
-let AccountStub, SharedTaskStub, TaskStub, UserStub = null
+let AccountModelStub, SharedTaskModelStub, TaskModelStub, UserModelStub = null
 
 const modelStubSetter = () => {
-  AccountStub = {
+  AccountModelStub = {
     belongsTo: function() {} 
   }
-  UserStub = {
+  UserModelStub = {
     hasOne: function() {},
     belongsTo: function() {},
     belongsToMany: sinon.spy() 
   }
-  TaskStub = {
+  TaskModelStub = {
     hasOne: function() {},
     belongsToMany: sinon.spy()
   }
-  SharedTaskStub = function() {}
+  SharedTaskModelStub = function() {}
 }
 
 ava.beforeEach(async () => {
   sandbox = sinon.createSandbox() 
   modelStubSetter()
-  setupDatabase = proxyquire("../", {
-    "./models/account": () => AccountStub,
-    "./models/sharedTask": () => SharedTaskStub,
-    "./models/task": () => TaskStub,
-    "./models/user": () => UserStub
+  setupDatabase = proxyquire("../../", {
+    "./models/account": () => AccountModelStub,
+    "./models/sharedTask": () => SharedTaskModelStub,
+    "./models/task": () => TaskModelStub,
+    "./models/user": () => UserModelStub
   })
 })
 
@@ -39,8 +39,8 @@ ava.afterEach(() => {
   sandbox && sandbox.restore()
 })
 
-ava("SharedTaskStub", test => {
+ava("shared task", test => {
   const database = setupDatabase({ dialect: "mariadb" })
-  //Cannot resolve this ==> test.true(TaskStub.belongsToMany.withArgs(SharedTaskStub).calledOnce, "SharedTaskStub should be used as parameter of Task.belongsToMany")
+  //Cannot resolve this ==> test.true(TaskModelStub.belongsToMany.withArgs(SharedTaskModelStub).calledOnce, "SharedTaskModelStub should be used as parameter of Task.belongsToMany")
   test.pass()
 })

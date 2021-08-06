@@ -33,7 +33,7 @@ ava.beforeEach(() => {
 
   modelStubSetter()
    
-  setupDatabase = proxyquire("../", {
+  setupDatabase = proxyquire("../../", {
     "./models/user": () => UserStub,
     "./models/account": () => AccountStub,
     "./models/task": () => TaskStub,
