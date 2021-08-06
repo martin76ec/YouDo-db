@@ -1,9 +1,9 @@
 "use strict"
 
 const ava = require("ava")
-const setupTaskModel = require("../models/task")
+const setupTaskModel = require("../../models/task")
 
-ava("Setup Task Model", test => {
+ava("setup task model", test => {
   const model = setupTaskModel({ dialect: "mariadb" })
   test.truthy(model, "taskModel should return")
   const isFunction = typeof(model) === "function"

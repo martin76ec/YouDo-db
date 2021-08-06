@@ -7,6 +7,7 @@ const setupSharedTaskModel = require("./models/sharedTask")
 const setupTaskModel = require("./models/task")
 const setupUserModel = require("./models/user")
 const setupUser = require("./lib/user") 
+const setupAccount = require("./lib/account")
 
 module.exports = async function(config) {
   const database = setupDatabase(config)
@@ -29,10 +30,11 @@ module.exports = async function(config) {
     await database.sync({ force: true })
   }
 
+  const Account = setupAccount(AccountModel)
   const User = setupUser(UserModel)
 
   return {
-    Account: {},
+    Account,
     User,
     SharedTask: {},
     Task: {}

@@ -1,7 +1,7 @@
 "use strict"
 
 const ava = require("ava")
-const setupSharedTaskModel = require("../models/sharedTask")
+const setupSharedTaskModel = require("../../models/sharedTask")
 
 ava("Setup SharedTask Model", test => {
   const sharedTask = setupSharedTaskModel({ dialect: "mariadb" })
