@@ -34,7 +34,7 @@ const accounts = [
   })
 ]
 
-function createAccount(newAccount) {
+ function createAccount(newAccount) {
   const accountExists = accounts.find(account => {
     return account.account_id === newAccount.account_id ||
     account.account_email === newAccount.account_email
@@ -44,7 +44,7 @@ function createAccount(newAccount) {
     return "[Duplicated] Account already exists."
   }
 
-  return accountExists
+  return !!accountExists
 }
 
 function getUserId(email, password) {
